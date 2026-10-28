@@ -13,12 +13,9 @@
         <h1>Lista de Tarefas</h1>
       </div>
 
-      <form action="task">
+      <form id="formTask">
         <label for="name">Tarefa:</label>
         <input type="text" name="name" id="name" />
-
-        <label for="date">Data:</label>
-        <input type="date" name="date" id="date" />
 
         <label for="lvl">Classificação</label>
         <select name="lvl" id="lvl">
@@ -26,6 +23,8 @@
           <option value="atent">Atenção</option>
           <option value="norm">Normal</option>
         </select>
+
+        <p id="listDescript" class="listDescript"></p>
 
         <button type="submit">Criar</button>
         <p id="msg" class="error" hidden></p>
@@ -36,9 +35,9 @@
 
       <div class="container">
         <button class="filter" data-filter="all">Todas</button>
-        <button class="filter" data-filter="urg">Ungente</button>
+        <button class="filter" data-filter="urg">Normal</button>
         <button class="filter" data-filter="atent">Atenção</button>
-        <button class="filter" data-filter="norm">Normal</button>
+        <button class="filter" data-filter="norm">Ungente</button>
       </div>
 
       <ul id="list" class="taskList"></ul>

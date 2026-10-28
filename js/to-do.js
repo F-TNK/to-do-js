@@ -1,4 +1,11 @@
 const task = document.querySelector("#task");
+const formTask = document.querySelector("#formTask");
+const listDescript = document.querySelector("#listDescript");
+
+const search = document.querySelector("#search");
+const empty = document.querySelector("#empty");
+
+let filters = "all";
 
 let urg = 0,
   atent = 0,
@@ -10,7 +17,6 @@ let tasks = [
   {
     num: 1,
     name: "Add Tarefas",
-    date: 2025 - 10 - 28,
     lvl: "atent",
     status: "pend",
   },
@@ -57,10 +63,67 @@ function createTask(task) {
   return t;
 }
 
+formTask.addEventListener("submit", (event) => {
+  event.preventDeFault();
+  const name = document.querySelector("#name");
+  const level = document.querySelector("#lvl");
+  const msg = document.querySelector("#msg");
+
+  if (name.value.trim() === "") {
+    const texto = "Preencha o campo da tarefa";
+    msg.hidden = false;
+    msg.textContent = texto;
+  } else {
+    msg.hidden = true;
+    msg.textContent = "";
+    tasks.push({
+      num: tasks[tasks.length - 1].numero + 1,
+      name: name.value.trim(),
+      lvl: level,
+      status: "pend",
+    });
+
+    msg.hidden = true;
+    formTask.reset();
+    name.focus();
+    write();
+  }
+});
+
+function desenhar() {
+  aguardando = 0;
+  concluido = 0;
+  producao = 0;
+
+  selectTask =
+    filters === "all" ? tasks : tasks.filter((task) => task.status === filters);
+
+  selectTask.forEach((task) => {
+    if (task.status === "pend") {
+      pending++;
+    } else {
+      concluded++;
+    }
+
+    let show = tasks;
+    if (filters !== "all") {
+      show = tasks.filter((task) => task.status === filters);
+    }
+
+    const searchText = search.value.trim().toLowerCase();
+    show = show.filter((task) => task.name.toLowerCase().includes(searchText));
+    list.textContent = "";
+    show.forEach((task) => {
+      list.append(createTask(task));
+    });
+    empty.hidden = show.length > 0;
+    refresh(show.length);
+  });
+}
+
+function refresh() {}
+
 function writeList() {
-  urg = 0;
-  atent = 0;
-  norm = 0;
   pend = 0;
   conc = 0;
 
@@ -71,4 +134,12 @@ function writeList() {
       concluded++;
     }
   });
+
+  listDescript.textContent =
+    tasks.length +
+    " tarefas na lista\n" +
+    "Pendentes: " +
+    pending +
+    "\nConluidas: " +
+    concluded;
 }
