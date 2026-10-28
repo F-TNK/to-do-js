@@ -3,7 +3,47 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <script src="css/style.css"></script>
+
+    <title>To Do List | JS</title>
   </head>
-  <body></body>
+  <body>
+    <main class="toDo">
+      <div class="mainTitle">
+        <h1>Lista de Tarefas</h1>
+      </div>
+
+      <form action="task">
+        <label for="name">Tarefa:</label>
+        <input type="text" name="name" id="name" />
+
+        <label for="date">Data:</label>
+        <input type="date" name="date" id="date" />
+
+        <label for="lvl">Classificação</label>
+        <select name="lvl" id="lvl">
+          <option value="urg">Ungente</option>
+          <option value="atent">Atenção</option>
+          <option value="norm">Normal</option>
+        </select>
+
+        <button type="submit">Criar</button>
+        <p id="msg" class="error" hidden></p>
+      </form>
+
+      <label for="search">Buscar Tarefa</label>
+      <input type="search" name="search" id="search" />
+
+      <div class="container">
+        <button class="filter" data-filter="all">Todas</button>
+        <button class="filter" data-filter="urg">Ungente</button>
+        <button class="filter" data-filter="atent">Atenção</button>
+        <button class="filter" data-filter="norm">Normal</button>
+      </div>
+
+      <ul id="list" class="taskList"></ul>
+      <p id="empty" hidden>Sem tarefas pendentes</p>
+    </main>
+    <script src="js/to-do.js"></script>
+  </body>
 </html>
