@@ -141,3 +141,5 @@ function refresh() {
 }
 
 writeList();
+
+// Estrutura para implementar BUSCA e FILTROS construida, mas não pronta
