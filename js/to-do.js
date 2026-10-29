@@ -10,8 +10,8 @@ let filters = "all";
 let urg = 0,
   atent = 0,
   norm = 0,
-  pend = 0,
-  conc = 0;
+  pending = 0,
+  concluded = 0;
 
 let tasks = [
   {
@@ -24,13 +24,12 @@ let tasks = [
 
 function createTask(task) {
   const t = document.createElement("li");
-  t.classList.add("task", "satatus-" + task.status);
+  t.classList.add("task", "status-" + task.status);
 
   const title = document.createElement("h3");
   title.textContent = task.num + 1 + "# - " + task.name + "\n" + task.date;
 
   t.append(title);
-  taskList.append(t);
 
   const change = document.createElement("button");
   if (task.status === "pend") {
@@ -50,6 +49,7 @@ function createTask(task) {
   t.append(change);
 
   const trash = document.createElement("button");
+  trash.textContent = "Excluir";
   trash.addEventListener("click", (event) => {
     if (
       confirm("Deseja excluir tarefa: " + task.num + " - " + task.name + "?")
@@ -64,7 +64,7 @@ function createTask(task) {
 }
 
 formTask.addEventListener("submit", (event) => {
-  event.preventDeFault();
+  event.preventDefault();
   const name = document.querySelector("#name");
   const level = document.querySelector("#lvl");
   const msg = document.querySelector("#msg");
@@ -77,7 +77,7 @@ formTask.addEventListener("submit", (event) => {
     msg.hidden = true;
     msg.textContent = "";
     tasks.push({
-      num: tasks[tasks.length - 1].numero + 1,
+      num: tasks[tasks.length - 1].num + 1,
       name: name.value.trim(),
       lvl: level,
       status: "pend",
@@ -86,14 +86,13 @@ formTask.addEventListener("submit", (event) => {
     msg.hidden = true;
     formTask.reset();
     name.focus();
-    write();
+    writeList();
   }
 });
 
-function desenhar() {
-  aguardando = 0;
-  concluido = 0;
-  producao = 0;
+function writeList() {
+  concluded = 0;
+  pending = 0;
 
   selectTask =
     filters === "all" ? tasks : tasks.filter((task) => task.status === filters);
@@ -121,12 +120,9 @@ function desenhar() {
   });
 }
 
-function refresh() {}
-
-function writeList() {
-  pend = 0;
-  conc = 0;
-
+function refresh() {
+  concluded = 0;
+  pending = 0;
   tasks.forEach((task) => {
     if (task.status === "pend") {
       pending++;
@@ -143,3 +139,5 @@ function writeList() {
     "\nConluidas: " +
     concluded;
 }
+
+writeList();

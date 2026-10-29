@@ -7,7 +7,7 @@
   --cor-fundo2: #3174b3;
   --cor-texto: #c3d3e2;
   /*--cor-destaque: #14ad87;*/
-  --cor-destaque: #c76e2a;
+  --cor-destaque: #14b150;
   --cor-borda: #d9ddd3;
   --cor-suave: #1f1e1e;
   --cor-suave2: #353434;
@@ -83,7 +83,7 @@ button:focus-visible {
 }
 
 /* ===== 5. Estados (o JavaScript troca estas classes) ===== */
-.resultado,
+.listDescript,
 .ok,
 .alerta,
 .erro {
@@ -119,22 +119,22 @@ button:focus-visible {
   margin: 1rem;
   padding: 1rem;
 }
-.lista-ops {
+.list {
   list-style: none;
   padding: 0;
   white-space: pre-line; /* aula 8: o \n vira quebra de linha */
 }
-.op {
+.task {
   margin-top: 1rem;
   padding: 1rem;
   border: 1px solid var(--cor-borda);
   border-left: 8px solid var(--cor-borda);
   border-radius: 8px;
 }
-.op h3 {
+.task h3 {
   margin: 0;
 }
-.op p {
+.task p {
   margin: 0.25rem 0;
 }
 .status-aguardando {
