@@ -21,7 +21,7 @@ function createTask(task) {
   t.classList.add("task", "status-" + task.status);
 
   const title = document.createElement("h3");
-  title.textContent = task.num + 1 + "# - " + task.name;
+  title.textContent = task.num + 1 + "# - " + task.name + "\n" + task.date;
 
   t.append(title);
 
@@ -61,6 +61,7 @@ formTask.addEventListener("submit", (event) => {
   event.preventDefault();
   const name = document.querySelector("#name");
   const level = document.querySelector("#lvl");
+  const date = document.querySelector("#date");
   const msg = document.querySelector("#msg");
 
   if (name.value.trim() === "") {
@@ -74,6 +75,7 @@ formTask.addEventListener("submit", (event) => {
       tasks.push({
         num: 0,
         name: name.value.trim(),
+        date: date.value,
         lvl: level,
         status: "pend",
       });
@@ -81,6 +83,7 @@ formTask.addEventListener("submit", (event) => {
       tasks.push({
         num: tasks[tasks.length - 1].num + 1,
         name: name.value.trim(),
+        date: date.value,
         lvl: level,
         status: "pend",
       });
