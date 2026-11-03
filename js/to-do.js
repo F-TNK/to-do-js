@@ -14,6 +14,7 @@ let urg = 0,
   pending = 0,
   concluded = 0,
   num = 0;
+id = 0;
 
 const save = () => {
   localStorage.setItem(CHAVE, JSON.stringify(tasks));
@@ -82,6 +83,7 @@ function createTask(task) {
 
 formTask.addEventListener("submit", (event) => {
   event.preventDefault();
+  const id = document.querySelector("#id");
   const name = document.querySelector("#name");
   const level = document.querySelector("#lvl");
   const date = document.querySelector("#date");
@@ -96,14 +98,16 @@ formTask.addEventListener("submit", (event) => {
     msg.textContent = "";
     if (tasks.length === 0) {
       tasks.push({
+        id: Date.now(),
         num: 0,
         name: name.value.trim(),
         date: date.value,
-        lvl: level,
+        lvl: level.value,
         status: "pend",
       });
     } else {
       tasks.push({
+        id: Date.now(),
         num: tasks[tasks.length - 1].num + 1,
         name: name.value.trim(),
         date: date.value,
