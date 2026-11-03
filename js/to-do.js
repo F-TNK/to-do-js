@@ -152,3 +152,5 @@ if (tasks.length === 0) {
 }
 
 // Estrutura para implementar BUSCA e FILTROS construida, mas não pronta
+
+// Atividade de memoria local
