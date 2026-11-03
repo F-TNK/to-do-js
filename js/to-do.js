@@ -4,6 +4,7 @@ const listDescript = document.querySelector("#listDescript");
 
 const search = document.querySelector("#search");
 const empty = document.querySelector("#empty");
+const CHAVE = "todo-tarefas";
 
 let filters = "all";
 
@@ -14,7 +15,25 @@ let urg = 0,
   concluded = 0,
   num = 0;
 
-let tasks = [];
+const save = () => {
+  localStorage.setItem(CHAVE, JSON.stringify(tasks));
+};
+
+// mudou o array: salva e desenha
+const updt = () => {
+  save();
+  writeList();
+};
+
+const load = () => {
+  const texto = localStorage.getItem(CHAVE);
+  if (texto === null) {
+    return []; // primeira visita: nada salvo ainda
+  }
+  return JSON.parse(texto);
+};
+
+let tasks = load();
 
 function createTask(task) {
   const t = document.createElement("li");
@@ -153,4 +172,4 @@ if (tasks.length === 0) {
 
 // Estrutura para implementar BUSCA e FILTROS construida, mas não pronta
 
-// Atividade de memoria local
+// Atividade de memoria
