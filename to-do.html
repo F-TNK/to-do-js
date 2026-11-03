@@ -15,10 +15,10 @@
 
       <form id="formTask">
         <label for="name">Tarefa:</label>
-        <input type="text" name="name" id="name" />
+        <input type="text" name="name" id="name" required />
 
         <label for="date">Data:</label>
-        <input type="date" name="date" id="date" />
+        <input type="date" name="date" id="date" required />
 
         <label for="lvl">Classificação:</label>
         <select name="lvl" id="lvl">
@@ -38,9 +38,9 @@
 
       <div class="container">
         <button class="filter" data-filter="all">Todas</button>
-        <button class="filter" data-filter="urg">Normal</button>
+        <button class="filter" data-filter="norm">Normal</button>
         <button class="filter" data-filter="atent">Atenção</button>
-        <button class="filter" data-filter="norm">Urgente</button>
+        <button class="filter" data-filter="urg">Urgente</button>
       </div>
 
       <ul id="list" class="taskList"></ul>

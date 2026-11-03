@@ -30,7 +30,11 @@ const load = () => {
   if (texto === null) {
     return []; // primeira visita: nada salvo ainda
   }
-  return JSON.parse(texto);
+  try {
+    return JSON.parse(texto);
+  } catch (erro) {
+    // o texto salvo não é JSON: avisa e começa do zero
+  }
 };
 
 let tasks = load();
@@ -57,7 +61,7 @@ function createTask(task) {
     } else {
       task.status = "pend";
     }
-    writeList();
+    updt();
   });
   t.append(change);
 
@@ -68,7 +72,7 @@ function createTask(task) {
       confirm("Deseja excluir tarefa: " + task.num + " - " + task.name + "?")
     ) {
       tasks = tasks.filter((t) => t !== task);
-      writeList();
+      updt();
     }
   });
   t.append(trash);
@@ -103,7 +107,7 @@ formTask.addEventListener("submit", (event) => {
         num: tasks[tasks.length - 1].num + 1,
         name: name.value.trim(),
         date: date.value,
-        lvl: level,
+        lvl: level.value,
         status: "pend",
       });
     }
@@ -111,7 +115,7 @@ formTask.addEventListener("submit", (event) => {
     msg.hidden = true;
     formTask.reset();
     name.focus();
-    writeList();
+    updt();
   }
 });
 
@@ -135,13 +139,17 @@ function writeList() {
     }
 
     const searchText = search.value.trim().toLowerCase();
-    show = show.filter((task) => task.name.toLowerCase().includes(searchText));
+    if (searchText) {
+      show = show.filter((t) => t.name.toLowerCase().includes(searchText));
+    }
+
     list.textContent = "";
     show.forEach((task) => {
       list.append(createTask(task));
     });
+
     empty.hidden = show.length > 0;
-    refresh(show.length);
+    refresh();
   });
 }
 
@@ -157,9 +165,9 @@ function refresh() {
   });
 
   listDescript.textContent =
+    "Número de Tarefas: " +
     tasks.length +
-    " tarefas na lista\n" +
-    "Pendentes: " +
+    "\nPendentes: " +
     pending +
     "\nConluidas: " +
     concluded;
